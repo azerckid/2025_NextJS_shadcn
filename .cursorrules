@@ -1,0 +1,24 @@
+nextJS TypeScript Prisma tailwind
+
+Key Principles
+
+
+Naming Conventions
+
+- Use lowercase with dashes for directories (e.g., components/auth-wizard).
+- Favor named exports for components.
+
+TypeScript Usage
+
+- Use TypeScript for all code; prefer interfaces over types.
+- Avoid enums; use maps instead.
+- Use functional components with TypeScript interfaces.
+
+Syntax and Formatting
+
+
+UI and Styling
+
+- Use Shadcn UI, Radix, and Tailwind for components and styling.
+
+Key Conventions
