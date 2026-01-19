@@ -21,7 +21,7 @@ export function Navigation() {
         fixed top-0 left-0 right-0 z-50 bg-background/50 border-b">
             <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between w-full">
                 <div className="flex items-center">
-                    <Link className="font-bold text-lg tracking-tighter" href="/">BetterAuth</Link>
+                    <Link className="font-bold text-lg tracking-tighter" href="/">NextShadcn</Link>
                     <Separator orientation="vertical" className="h-6 mx-4" />
                     <NavigationMenu>
                         <NavigationMenuList className="flex items-center gap-6">
