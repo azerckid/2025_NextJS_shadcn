@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props) {
     const { id } = await params;
     const movie = await getMovie(id);
     return {
-        title: movie ? `${movie.title} | Movies` : "Movie Detail",
+        title: movie ? `${movie.title}` : "Movie Detail",
         description: movie?.overview || "Movie detail page",
     };
 }

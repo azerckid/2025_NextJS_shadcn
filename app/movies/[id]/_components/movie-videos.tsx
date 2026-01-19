@@ -13,7 +13,10 @@ const BASE_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 async function getVideos(id: string) {
     const response = await fetch(`${BASE_URL}/${id}/videos`, { next: { revalidate: 60 } });
-    if (!response.ok) return [];
+    if (!response.ok) {
+        if (response.status === 404) return [];
+        throw new Error("예고편 정보를 불러오는 중 서버 에러가 발생했습니다.");
+    }
     const data = await response.json();
     const result = z.array(VideoSchema).safeParse(data);
     return result.success ? result.data : [];

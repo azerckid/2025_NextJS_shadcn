@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { Star, Clock, Calendar, Info, Play } from "lucide-react";
 
+import { notFound } from "next/navigation";
+
 // 영화 상세 데이터 스키마
 export const MovieDetailSchema = z.object({
     id: z.number(),
@@ -19,7 +21,10 @@ const BASE_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 async function getMovie(id: string) {
     const response = await fetch(`${BASE_URL}/${id}`, { next: { revalidate: 60 } });
-    if (!response.ok) return null;
+    if (!response.ok) {
+        if (response.status === 404) return null;
+        throw new Error("영화를 불러오는 중 서버 에러가 발생했습니다.");
+    }
     const data = await response.json();
     const result = MovieDetailSchema.safeParse(data);
     return result.success ? result.data : null;
@@ -28,7 +33,9 @@ async function getMovie(id: string) {
 export async function MovieInfo({ id }: { id: string }) {
     const movie = await getMovie(id);
 
-    if (!movie) return null;
+    if (!movie) {
+        notFound();
+    }
 
     return (
         <>
