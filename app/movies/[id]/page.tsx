@@ -68,8 +68,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function MovieDetail({ params }: Props) {
     const { id } = await params;
-    const movie = await getMovie(id);
-    const videos = await getVideos(id);
+    const [movie, videos] = await Promise.all([getMovie(id), getVideos(id)]);
 
     if (!movie) {
         return (
