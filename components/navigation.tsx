@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "@/components/ui/navigation-menu";
