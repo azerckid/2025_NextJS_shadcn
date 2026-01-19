@@ -9,8 +9,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Better Auth + Next.js 16",
-  description: "Modern authentication template with Next.js 16 and Better Auth",
+  title: {
+    template: "%s | Next Movies",
+    default: "Next Movies",
+  },
+  description: "The best movies on the web",
 };
 
 export default function RootLayout({
