@@ -28,7 +28,7 @@ const VideoSchema = z.object({
 const BASE_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 async function getMovie(id: string) {
-    const response = await fetch(`${BASE_URL}/${id}`);
+    const response = await fetch(`${BASE_URL}/${id}`, { next: { revalidate: 60 } });
     if (!response.ok) return null;
     const data = await response.json();
     const result = MovieDetailSchema.safeParse(data);
@@ -36,11 +36,21 @@ async function getMovie(id: string) {
 }
 
 async function getVideos(id: string) {
-    const response = await fetch(`${BASE_URL}/${id}/videos`);
+    const response = await fetch(`${BASE_URL}/${id}/videos`, { next: { revalidate: 60 } });
     if (!response.ok) return [];
     const data = await response.json();
     const result = z.array(VideoSchema).safeParse(data);
     return result.success ? result.data : [];
+}
+
+// Static Rendering용 파라미터 생성 (사전 렌더링)
+export async function generateStaticParams() {
+    const response = await fetch(BASE_URL);
+    const movies = await response.json();
+    // 상위 20개 영화만 미리 정적 생성하여 빌드 속도와 런타임 성능 균형을 맞춤
+    return movies.slice(0, 20).map((movie: { id: number }) => ({
+        id: movie.id.toString(),
+    }));
 }
 
 type Props = {

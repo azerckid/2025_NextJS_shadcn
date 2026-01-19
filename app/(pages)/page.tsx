@@ -15,9 +15,9 @@ type Movie = z.infer<typeof MovieSchema>;
 
 const API_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
-// 서버 사이드 데이터 패칭
+// 서버 사이드 데이터 패칭 (ISR 60초 적용)
 async function getMovies(): Promise<Movie[]> {
-  const response = await fetch(API_URL);
+  const response = await fetch(API_URL, { next: { revalidate: 60 } });
   if (!response.ok) {
     throw new Error("영화를 불러오는데 실패했습니다.");
   }
