@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Home, FileQuestion, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
+    const router = useRouter();
+
     return (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 text-center bg-background">
             {/* Background decoration */}
@@ -38,14 +43,16 @@ export default function NotFound() {
                         </Link>
                     </Button>
 
-                    <Button asChild variant="outline" size="lg" className="rounded-2xl px-8 h-12 text-md transition-all hover:bg-accent/50 group">
-                        <button
-                            onClick={() => typeof window !== 'undefined' && window.history.back()}
-                            className="flex items-center gap-2"
-                        >
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        className="rounded-2xl px-8 h-12 text-md transition-all hover:bg-accent/50 group"
+                        onClick={() => router.back()}
+                    >
+                        <div className="flex items-center gap-2 cursor-pointer">
                             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                             이전 페이지로
-                        </button>
+                        </div>
                     </Button>
                 </div>
 
