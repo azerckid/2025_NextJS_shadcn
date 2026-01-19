@@ -31,6 +31,7 @@ async function getMovie(id: string) {
 }
 
 export async function MovieInfo({ id }: { id: string }) {
+    // throw new Error("테스트를 위한 의도적인 에러 발생!");
     const movie = await getMovie(id);
 
     if (!movie) {
